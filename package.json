@@ -2,6 +2,7 @@
   "name": "xmas-next",
   "version": "0.1.0",
   "private": true,
+  "license": "Unlicense",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,7 +13,6 @@
     "next": "10.0.3",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-snowstorm": "^0.0.3",
     "sass": "^1.30.0"
   }
 }

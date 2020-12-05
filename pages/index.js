@@ -40,7 +40,16 @@ export default function Home({ albums }) {
           </div>
         </main>
 
-        <footer></footer>
+        <footer>
+          <p>
+            All media on this website is for sampling and promotional purposes
+            and we encourage you to purchase the albums of any song you hear and
+            like. If you have rights to any of the media here (or represent
+            those who do) and feel that we have not used your media in the way
+            it was intended, please contact us (xmas [at] irk dot com) and we'll
+            remove it. Happy holidays!
+          </p>
+        </footer>
       </div>
     </>
   );
