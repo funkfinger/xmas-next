@@ -1,9 +1,9 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { promises as fs } from 'fs';
 import path from 'path';
 import compareFunc from 'compare-func';
-// import Snow from 'react-snowstorm';
+
+import Album from '../components/album';
 
 export default function Home({ albums }) {
   return (
@@ -23,19 +23,7 @@ export default function Home({ albums }) {
         <main>
           <div className='albums'>
             {albums.map((album) => {
-              return (
-                <div key={`album-${album.id}`} className='album'>
-                  <h3>{album.albumTitle}</h3>
-                  <Image
-                    alt={album.albumTitle}
-                    title={album.albumTitle}
-                    src={`/covers/${album.id}-cover.jpeg`}
-                    layout='intrinsic'
-                    width={300}
-                    height={300}
-                  />
-                </div>
-              );
+              return <Album album={album} />;
             })}
           </div>
         </main>
@@ -64,7 +52,6 @@ export async function getStaticProps() {
   albums.sort(compareFunc(-'id'));
   return {
     props: {
-      path: path.join(process.cwd(), 'pages', 'data', 'albums.json'),
       albums,
     },
   };

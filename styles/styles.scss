@@ -18,6 +18,12 @@ header {
   h1 {
     margin: 0;
     padding: 0.5em;
+    color: darkgreen;
+    -webkit-text-stroke: 1px rgba(#fff, 0.5);
+    color: darkgreen;
+    text-shadow: 3px 3px 0 rgba(#fff, 0.5), -1px -1px 0 rgba(#fff, 0.5),
+      1px -1px 0 rgba(#fff, 0.5), -1px 1px 0 rgba(#fff, 0.5),
+      1px 1px 0 rgba(#fff, 0.5);
     small {
       font-size: 0.5em;
       display: block;
@@ -51,4 +57,9 @@ footer {
   min-width: 280px;
   margin: 1em;
   text-align: center;
+}
+
+.track-list {
+  text-align: left;
+  // display: none;
 }
