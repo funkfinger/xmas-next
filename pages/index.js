@@ -1,65 +1,62 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import Image from 'next/image';
+import { promises as fs } from 'fs';
+import path from 'path';
+import compareFunc from 'compare-func';
+// import Snow from 'react-snowstorm';
 
-export default function Home() {
+export default function Home({ albums }) {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Carrie, Jay &amp; Wilson's MERRY MERRY XMAS</title>
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <div className='page'>
+        <header>
+          <h1>
+            <small>Carrie, Jay &amp; Wilson's</small> MERRY MERRY XMAS
+          </h1>
+        </header>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+        <main>
+          <div className='albums'>
+            {albums.map((album) => {
+              return (
+                <div key={`album-${album.id}`} className='album'>
+                  <h3>{album.albumTitle}</h3>
+                  <Image
+                    alt={album.albumTitle}
+                    title={album.albumTitle}
+                    src={`/covers/${album.id}-cover.jpeg`}
+                    layout='intrinsic'
+                    width={300}
+                    height={300}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </main>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+        <footer></footer>
+      </div>
+    </>
+  );
+}
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+export async function getStaticProps() {
+  // const raw = await fs.readFile(`/pages/data/albums.json`);
+  const raw = await fs.readFile(
+    path.join(process.cwd(), 'data', 'albums.json')
+  );
+  const albums = JSON.parse(raw);
+  albums.sort(compareFunc(-'id'));
+  return {
+    props: {
+      path: path.join(process.cwd(), 'pages', 'data', 'albums.json'),
+      albums,
+    },
+  };
 }
