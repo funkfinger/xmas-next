@@ -1,7 +1,8 @@
 {
     "version": "0.1",
     "ignorePaths": [
-        "data/albums.json"
+        "data/albums.json",
+        "styles/_*"
     ],
     "words": [
         "Unlicense"

@@ -1,13 +1,24 @@
 import Head from 'next/head';
+import { useState } from 'react';
 import { promises as fs } from 'fs';
 import path from 'path';
 import compareFunc from 'compare-func';
 
 import Album from '../components/album';
+import TrackList from '../components/track-list';
 
 export default function Home({ albums }) {
+  const [showModal, setShowModal] = useState(false);
+  const currentAlbum = albums[0];
+  const priorAlbums = albums.slice(1);
+  const [currentModalAlbum, setcurrentModalAlbum] = useState(currentAlbum);
+
+  const setModalAlbum = (a) => {
+    setCurrentModalAlbum(a);
+  };
+
   return (
-    <>
+    <div>
       <Head>
         <title>Carrie, Jay &amp; Wilson's MERRY MERRY XMAS</title>
         <link rel='icon' href='/favicon.ico' />
@@ -21,10 +32,28 @@ export default function Home({ albums }) {
         </header>
 
         <main>
+          <h2>{showModal ? 'showModal' : 'hideModal'}</h2>
+          <button
+            onClick={() => {
+              setcurrentModalAlbum(currentAlbum);
+              setShowModal(true);
+            }}
+          >
+            toggle
+          </button>
           <div className='albums'>
-            {albums.map((album) => {
-              return <Album album={album} />;
-            })}
+            <div className='current-album'>
+              <Album key={currentAlbum.id} album={currentAlbum} size={350} />
+            </div>
+            <div className='past-albums'>
+              {priorAlbums.map((album) => {
+                return (
+                  <div className='past-album'>
+                    <Album key={album.id} album={album} />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </main>
 
@@ -38,8 +67,13 @@ export default function Home({ albums }) {
             remove it. Happy holidays!
           </p>
         </footer>
+
+        <div className={showModal ? 'showModal' : 'hideModal'}>
+          <Album album={currentModalAlbum} size={350} />
+          <TrackList tracks={currentModalAlbum.songs}></TrackList>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 
