@@ -1,8 +1,9 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { promises as fs } from 'fs';
 import path from 'path';
 import compareFunc from 'compare-func';
+// import dialogPolyfill from 'dialog-polyfill';
 
 import Album from '../components/album';
 import TrackList from '../components/track-list';
@@ -13,12 +14,20 @@ export default function Home({ albums }) {
   const priorAlbums = albums.slice(1);
   const [currentModalAlbum, setcurrentModalAlbum] = useState(currentAlbum);
 
-  const setModalAlbum = (a) => {
-    setCurrentModalAlbum(a);
+  // let dialog;
+  useEffect(() => {
+    // dialog = document.querySelector('dialog');
+    // dialogPolyfill.registerDialog(dialog);
+    // dialog.showModal();
+  }, []);
+
+  const modalAlbum = (a) => {
+    setcurrentModalAlbum(a);
+    setShowModal(true);
   };
 
   return (
-    <div>
+    <div className='next-body'>
       <Head>
         <title>Carrie, Jay &amp; Wilson's MERRY MERRY XMAS</title>
         <link rel='icon' href='/favicon.ico' />
@@ -32,24 +41,26 @@ export default function Home({ albums }) {
         </header>
 
         <main>
-          <h2>{showModal ? 'showModal' : 'hideModal'}</h2>
-          <button
-            onClick={() => {
-              setcurrentModalAlbum(currentAlbum);
-              setShowModal(true);
-            }}
-          >
-            toggle
-          </button>
+          <h2>{showModal ? '  show-modal' : 'hide-modal'}</h2>
+          <h2>albumTitle = {currentModalAlbum.albumTitle}</h2>
           <div className='albums'>
             <div className='current-album'>
-              <Album key={currentAlbum.id} album={currentAlbum} size={350} />
+              <Album
+                key={currentAlbum.id}
+                album={currentAlbum}
+                size={350}
+                clickAction={modalAlbum}
+              />
             </div>
             <div className='past-albums'>
               {priorAlbums.map((album) => {
                 return (
                   <div className='past-album'>
-                    <Album key={album.id} album={album} />
+                    <Album
+                      key={album.id}
+                      album={album}
+                      clickAction={modalAlbum}
+                    />
                   </div>
                 );
               })}
@@ -68,10 +79,28 @@ export default function Home({ albums }) {
           </p>
         </footer>
 
-        <div className={showModal ? 'showModal' : 'hideModal'}>
-          <Album album={currentModalAlbum} size={350} />
-          <TrackList tracks={currentModalAlbum.songs}></TrackList>
-        </div>
+        {/* <dialog
+          onClick={(e) => {
+            console.log(e.target);
+          }}
+        > */}
+        <dialog className={showModal ? 'show-modal' : 'hide-modal'}>
+          {/* <div className={showModal ? 'show-modal' : 'hide-modal'}> */}
+          <div className='album-modal'>
+            <button
+              onClick={() => {
+                console.log('clicked');
+                setShowModal(false);
+                console.log(showModal);
+              }}
+            >
+              close
+            </button>
+            <Album album={currentModalAlbum} size={350} />
+            <TrackList tracks={currentModalAlbum.songs}></TrackList>
+          </div>
+          {/* </div> */}
+        </dialog>
       </div>
     </div>
   );

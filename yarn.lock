@@ -1250,6 +1250,11 @@ detect-libc@^1.0.3:
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
   integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
 
+dialog-polyfill@^0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/dialog-polyfill/-/dialog-polyfill-0.5.4.tgz#e43bc54794a7fc605852352649bdd4d03cfb59e5"
+  integrity sha512-LqQvIky9+qIFD7MCESOXdMZc4ObCdEbzbuvnPJVCiRXKQMzMjpQKK50UI+2sj0bJBPKn6ugPpMRpuLrgYc4RjA==
+
 diffie-hellman@^5.0.0:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/diffie-hellman/-/diffie-hellman-5.0.3.tgz#40e8ee98f55a2149607146921c63e1ae5f3d2875"
