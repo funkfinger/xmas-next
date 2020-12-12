@@ -150,3 +150,13 @@ button.no-style {
   cursor: pointer;
   outline: inherit;
 }
+
+.current-album img {
+  max-width: 90%;
+  height: auto;
+}
+
+.past-albums img {
+  max-width: 90%;
+  height: auto;
+}
