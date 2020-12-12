@@ -41,8 +41,6 @@ export default function Home({ albums }) {
         </header>
 
         <main>
-          <h2>{showModal ? '  show-modal' : 'hide-modal'}</h2>
-          <h2>albumTitle = {currentModalAlbum.albumTitle}</h2>
           <div className='albums'>
             <div className='current-album'>
               <Album
@@ -52,6 +50,16 @@ export default function Home({ albums }) {
                 clickAction={modalAlbum}
               />
             </div>
+            {/* <div className='spotify-embed'>
+              <iframe
+                src='https://open.spotify.com/embed/playlist/7gHCWiuQwjU8dgDA6tIQby'
+                width='300'
+                height='380'
+                frameborder='0'
+                allowtransparency='true'
+                allow='encrypted-media'
+              ></iframe>
+            </div> */}
             <div className='past-albums'>
               {priorAlbums.map((album) => {
                 return (
