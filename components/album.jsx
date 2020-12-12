@@ -1,9 +1,17 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 
 const Album = ({ album, size, clickAction }) => {
   const coverSize = size ? size : 250;
   const image = (
-    <Image
+    // <Image
+    //   alt={album.albumTitle}
+    //   title={album.albumTitle}
+    //   src={`/covers/${album.id}-cover.jpeg`}
+    //   layout='intrinsic'
+    //   width={coverSize}
+    //   height={coverSize}
+    // />
+    <img
       alt={album.albumTitle}
       title={album.albumTitle}
       src={`/covers/${album.id}-cover.jpeg`}
